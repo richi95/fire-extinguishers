@@ -8,7 +8,7 @@
                         <v-icon name="io-close-sharp" class="close-icon" scale="1.25" @click="$emit('close')"/>
                     </div>
                     <div>
-                        <label for="">Telephely</label>
+                        <label>Telephely</label>
                         <select class="form-select" v-model="data.place" >
                             <option value="PRÓBAFELADAT1">PRÓBAFELADAT1</option>
                             <option value="PRÓBAFELADAT2">PRÓBAFELADAT2</option>
@@ -16,15 +16,15 @@
                         </select>
                     </div>
                     <div >
-                        <label for="">Belső azonosító</label>
+                        <label>Belső azonosító</label>
                         <input type="text" class="form-control" v-model="data.internal_identifier" placeholder="belső azonosító">
                     </div>
                     <div>
-                        <label for="">Készenléti helye</label>
+                        <label>Készenléti helye</label>
                         <input type="text" class="form-control" v-model="data.standby_location" placeholder="készenléti helye">
                     </div>
                     <div>
-                        <label for="">Készüléktípus</label>
+                        <label>Készüléktípus</label>
                         <select class="form-select" v-model="data.device_type">
                             <option value="" disabled selected hidden>készüléktípus</option>
                             <option value="Készülék1">Készülék1</option>
@@ -33,11 +33,11 @@
                         </select>
                     </div>
                     <div>
-                        <label for="">Gyári száma</label>
+                        <label>Gyári száma</label>
                         <input type="text" class="form-control" v-model="data.serial_number" placeholder="gyári száma">
                     </div>
                     <div class="production-date">
-                        <label for="">Gyártás</label>
+                        <label>Gyártás</label>
                         <div>
                             <select id="year" class="form-select" v-model="data.year">
                                 <option disabled selected hidden value="">év</option>
@@ -54,13 +54,13 @@
                         </div>
                     </div>
                     <div>
-                        <label for="">Megjegyzés</label>
+                        <label>Megjegyzés</label>
                         <textarea class="form-control" v-model="data.comment" placeholder="megjegyzés"></textarea>
                     </div>
                     <div>
-                        <label for="">Töbszörösítés</label>
+                        <label>Töbszörösítés</label>
                         <select class="form-select" v-model="data.multiplication">
-                            <option value="" disabled selected> - </option>
+                            <option value="1" disabled selected> - </option>
                             <option v-for="piece in pieces" :value="piece">{{ piece }} db</option>
                         </select>
                     </div>
@@ -98,7 +98,7 @@
                     month: '',
                     day: '',
                     comment:'',
-                    multiplication:'',
+                    multiplication:'1',
                 },
                 years: [],
                 months: [],
@@ -113,7 +113,6 @@
             this.months = Array.from({ length: 12 }, (_, i) => 1 + i);
             this.days = Array.from({ length: 31 }, (_, i) => 1 + i);
         },
-
         methods:{
             async postData() {
                 this.loading = true;
@@ -125,6 +124,18 @@
                 this.loading = false;
                 this.$emit('refetch');
                 this.$emit('close');
+                this.data = {
+                    place: 'PRÓBAFELADAT1',
+                    internal_identifier: '',
+                    standby_location:'',
+                    device_type:'',
+                    serial_number:'',
+                    year:'',
+                    month: '',
+                    day: '',
+                    comment:'',
+                    multiplication:'1',
+                }
             },
         },
 

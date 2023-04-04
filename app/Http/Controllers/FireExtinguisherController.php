@@ -87,8 +87,8 @@ class FireExtinguisherController extends Controller
             'comment'=> @$validated['comment'],
         ]);
 
-        if($validated['multiplication']){
-            for($i =0; $i < $validated['multiplication'];$i++){
+        if ($validated['multiplication'] > 1) {
+            for ($i = 1; $i < $validated['multiplication']; $i++) {
                 FireExtinguisher::create([
                     'place' => $validated['place'],
                     'internal_identifier' => $validated['internal_identifier'],

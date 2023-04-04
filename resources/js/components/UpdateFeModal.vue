@@ -9,7 +9,7 @@
                     </div>
                     <div>
                         <label>Telephely</label>
-                        <select class="form-select" :value="feData.place" @input="data.place = $event.target.value" >
+                        <select class="form-select" v-model="feData.place" >
                             <option value="PRÓBAFELADAT1">PRÓBAFELADAT1</option>
                             <option value="PRÓBAFELADAT2">PRÓBAFELADAT2</option>
                             <option value="PRÓBAFELADAT3">PRÓBAFELADAT3</option>
@@ -20,8 +20,7 @@
                         <input 
                             type="text" 
                             class="form-control" 
-                            :value="feData.internal_identifier" 
-                            @input="data.internal_identifier = $event.target.value"
+                            v-model="feData.internal_identifier" 
                             placeholder="belső azonosító">
                     </div>
                     <div>
@@ -29,16 +28,14 @@
                         <input 
                             type="text" 
                             class="form-control" 
-                            :value="feData.standby_location"
-                            @input="data.standby_location = $event.target.value"
+                            v-model="feData.standby_location"
                             placeholder="készenléti helye">
                     </div>
                     <div>
                         <label>Készüléktípus</label>
                         <select 
                             class="form-select" 
-                            :value="feData.device_type"
-                            @input="data.device_type = $event.target.value"
+                            v-model="feData.device_type"
                             >
                             <option value="" disabled selected hidden>készüléktípus</option>
                             <option value="Készülék1">Készülék1</option>
@@ -51,25 +48,24 @@
                         <input 
                             type="text" 
                             class="form-control" 
-                            :value="feData.serial_number" 
-                            @input="data.serial_number = $event.target.value"
+                            v-model="feData.serial_number" 
                             placeholder="gyári száma">
                     </div>
                     <div class="production-date">
                         <label>Gyártás</label>
                         <div>
                             <select id="year" class="form-select" :value="feData.date_of_manufacture.split('-')[0]" 
-                                @input="data.year = $event.target.value">
+                                @input="feData.year = $event.target.value">
                                 <option disabled selected hidden value="">év</option>
                                 <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
                             </select>
                             <select id="month" class="form-select" :value="feData.date_of_manufacture.split('-')[1]"
-                                @input="data.month = $event.target.value">
+                                @input="feData.month = $event.target.value">
                                 <option disabled selected hidden value="">hónap</option>
                                 <option v-for="month in months" :key="month" :value="month.toLocaleString('en-US', { minimumIntegerDigits: 2 })">{{ month.toLocaleString('en-US', { minimumIntegerDigits: 2 }) }}</option>
                             </select>
                             <select id="day" class="form-select" :value="feData.date_of_manufacture.split('-')[2]" 
-                                @input="data.day = $event.target.value">
+                                @input="feData.day = $event.target.value">
                                 <option disabled selected hidden value="">nap</option>
                                 <option v-for="day in days" :key="day" :value="day.toLocaleString('en-US', { minimumIntegerDigits: 2 })">{{ day.toLocaleString('en-US', { minimumIntegerDigits: 2 }) }}</option>
                             </select>
@@ -79,16 +75,15 @@
                         <label>Megjegyzés</label>
                         <textarea
                             class="form-control"
-                            :value="feData.comment"
-                            @input="data.comment = $event.target.value"
+                            v-model="feData.comment"
                             placeholder="megjegyzés"
                             ></textarea>
                     </div>
                     <div>
                         <label>Töbszörösítés</label>
-                        <select class="form-select" :value="''"
-                        @input="data.multiplication = $event.target.value">
-                            <option value="" disabled selected> - </option>
+                        <select class="form-select" value="1"
+                        @input="feData.multiplication = $event.target.value">
+                            <option value="1" disabled selected> - </option>
                             <option v-for="piece in pieces" :value="piece">{{ piece }} db</option>
                         </select>
                     </div>
@@ -125,18 +120,6 @@
         },
         data() {
             return{
-                data: {
-                    place: '',
-                    internal_identifier: '',
-                    standby_location:'',
-                    device_type:'',
-                    serial_number:'',
-                    comment:'', 
-                    year:'',
-                    month: '',
-                    day: '',
-                    multiplication:'',
-                },
                 years: [],
                 months: [],
                 days: [],
@@ -153,11 +136,19 @@
         methods:{
             async updateData() {
                 this.loading = true;
+                if(!this.feData.year || !this.feData.month || !this.feData.day){
+                    this.feData.year = this.feData.date_of_manufacture.split('-')[0];
+                    this.feData.month = this.feData.date_of_manufacture.split('-')[1];
+                    this.feData.day = this.feData.date_of_manufacture.split('-')[2];
+                }
+                if(!this.feData.multiplication) this.feData.multiplication = 1;
+                
                 try {
-                    await axios.put('/fire-extinguishers/'+this.feData.id, this.data );
+                    await axios.put('/fire-extinguishers/'+this.feData.id, this.feData );
                 } catch (error) {
                 console.error(error);
                 }
+
                 this.loading = false;
                 this.$emit('refetch');
                 this.$emit('close');
