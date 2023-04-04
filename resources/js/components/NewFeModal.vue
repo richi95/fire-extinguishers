@@ -122,7 +122,7 @@
                 } catch (error) {
                 console.error(error);
                 }
-                this.loading = true;
+                this.loading = false;
                 this.$emit('refetch');
                 this.$emit('close');
             },

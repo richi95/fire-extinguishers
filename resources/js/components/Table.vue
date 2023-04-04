@@ -27,7 +27,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="p in data" :class="{'list_success': p?.maintenance?.service_date}">
+        <tr v-for="p in data" :class="{'list_success': p?.maintenance}">
             <td>{{ p.id }}</td>
             <td class="d-flex flex-column justify-content-around">
                 <div class="icon-button" @click="$emit('fe-data', p)">
