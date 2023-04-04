@@ -12,7 +12,8 @@ Telepítse a projecthez való függőségeket.
 
 ### `php artisan migrate`
 
-Telepítse az adatbázist migrációs fájlból.
+Telepítse az adatbázist migrációs fájlból. 
+A parancs futtatása előtt győződjön meg arról, hogy beállította az adatbázis hitelesítő adatait az alkalmazás .env fájljában.
 
 ### `npm run dev` && `php artisan serv`
 
