@@ -1,0 +1,201 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+
+.content{
+    margin-bottom: 5rem;
+}
+
+.title{
+    margin: 2rem 0;
+    h2{
+        display: inline-block;
+        padding-right: 50px;
+        border-bottom: 1px solid $red;
+    }
+}
+.title-modal{
+    display: flex;
+    align-items: flex-start!important;
+}
+.close-icon{
+    opacity: .5;
+    &:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+}
+
+.add-button{
+    padding: .5rem 1rem;
+    color: white;
+    background-color: $warn;
+    border: none;
+    margin: 2rem 0;
+}
+
+.fire-table {
+    th,td{
+        border: 1px solid $lines;
+        font-weight: 100%;
+        text-align: center;
+    }
+}
+
+.fire-table{
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    th{
+        background-color: white;
+        padding: 1rem 1rem;
+    }
+    td{
+        background-color: $light-danger;
+        padding: 0 1rem;
+        .custom-btn{
+            background-color: $red;
+            border:none;
+        }
+    }
+    tbody{
+        tr{
+            border-left: .5rem solid $red;
+            text-align: justify;
+        }
+        td{
+            height: 120px;
+            .bordered-date{
+                border: 1px solid $primary;
+                padding: .5rem 1rem;
+                font-weight: normal;
+            }
+        }
+        .list_success{
+            border-left: .5rem solid $green;
+            td{
+                background-color: $light-success;
+            }
+        }
+    }
+}
+
+.icon-button, .icon-button *{
+    background-color: $red;
+    border:none;
+    cursor: pointer;
+}
+
+.icon-button{
+    padding: 10px;
+}
+
+.modal-mask{
+    background-color: rgba(99, 99, 99, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    .modal-container{
+        margin: 50px 0;
+        background-color: white;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        .form-group{
+            div{
+                margin: 1rem 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                select, input, textarea{
+                    width: 60%;
+                    option{
+                        background-color: white;
+                        padding: 2px;
+                        &:hover{
+                            background-color: $red;
+                        }
+                    }
+                }
+                
+                label{
+                    font-weight: bolder;
+                }
+            }
+            .production-date{
+                div{
+                    width: 60%;
+                }
+                #year{
+                    width: 50%;
+                }
+                #month{
+                    width: 30%;
+                }
+                #day{
+                    width: 20%;
+                }
+            }
+        }
+        div{
+            text-align: end;
+        }
+    }
+    
+    .new-service-modal{
+        margin-top: 50px;
+        margin-bottom: 500px;
+    }
+}
+
+.button-green, .button-red{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 6rem;
+    height: 2.5rem;
+    color: white;
+    margin: 0 4px;
+}
+
+.button-green{
+    background-color: $primary-green;
+}
+
+.button-red{
+    background-color: $red
+}
+
+.button-loading{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.pdf-generate{
+    display: flex;
+    justify-content: end;
+    .pdf-generate-button{
+        text-decoration: none;
+        border: none;
+        padding: .5rem 1rem;
+        background-color: $gray-800;
+        color: white;
+        &:hover{
+            cursor: pointer;
+            color: white;
+        }
+    }
+}
